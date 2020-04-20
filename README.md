@@ -10,7 +10,7 @@ docker run -it -p 3500:3500 custom_apirest<br>
 
 you can go to : IP:3500 or localhost:3500
 
-# For docker (SERVER FRONT)
+# For docker (SERVER BACK)
 
 You must go in json-server folder: cd json-server <br>
 
