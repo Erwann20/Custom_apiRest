@@ -19,6 +19,6 @@ build the docker with a docker file : docker build -t json-server . <br>
 
 run the docker image with the name : json-server<br><br>
 
-docker run -it -p 8080:8080 custom_apirest<br>
+docker run -it -p 8080:8080 json-server<br>
 
 you can go to : IP:8080 or localhost:8080
