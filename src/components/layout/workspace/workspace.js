@@ -3,15 +3,17 @@ import axios from 'axios'
 
 import FormTitle from '../../fundamentale/formTitle'
 import FormButton from '../../fundamentale/formButton'
+import Home from '../../page/home/home'
 
 
 import './workspace.sass'
 import { TextField } from '@material-ui/core';
-import { Router, BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Route, useHistory, Redirect } from 'react-router-dom';
 
 export default function Workspace() {
     const [pseudo, setPseudo] = useState()
-    const [present, setPresent] = useState(false)
+    const [present, setPresent] = useState(true)
+    const history = useHistory();
 
     function submit() {
       setPresent(false)
@@ -25,6 +27,7 @@ export default function Workspace() {
 
             if (pseudo === user.name) {
               setPresent(true)
+        
             }
           })
         }
@@ -38,24 +41,34 @@ export default function Workspace() {
       } else {
         text ="Le pseudo est valide"
       }
-
-      return (
-        <BrowserRouter>
-          <div className="component-workspace">
-              
-              <div class="workspace-title">
-                <FormTitle text="Saisir un pseudo"/>
-              </div>
-              <div class="workspace-form">
-                <TextField class="textField" id="standard-basic" onChange={e => setPseudo(e.target.value)}/>
-                <FormButton submit={() => submit()}/>
-              </div>
-            {text}
-          </div>
-          <div className="main-route-place">
-              {/* <Route exact path="/login" component={FormConnect} /> */}
-          </div>
-        </BrowserRouter>
-      )
+      
+      if (present === true) {
+          return (
+            <div className="">
+              <Home pseudo={pseudo}/>
+            </div> 
+          )
+      } else {
+        return (
+          <BrowserRouter>
+            <div className="component-workspace">
+                
+                <div class="workspace-title">
+                  <FormTitle text="Saisir un pseudo"/>
+                </div>
+                <div class="workspace-form">
+                  <TextField class="textField" id="standard-basic" onChange={e => setPseudo(e.target.value)}/>
+                  <FormButton submit={() => submit()}/>
+                </div>
+              {text}
+            </div>
+            <div className="main-route-place">
+                <Route exact path="/home" component={Home} />
+  
+            </div>
+          </BrowserRouter>
+        )
+      }
+     
     
   }
