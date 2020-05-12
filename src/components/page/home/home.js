@@ -1,6 +1,7 @@
 import React from 'react';
 import './home.scss'
-import Workspace from '../../layout/workspace/workspace'
+import Nav from '../../fundamentale/nav/nav'
+import { BrowserRouter } from 'react-router-dom';
 // import { connect } from "react-redux";
 // import { bindActionCreators } from "redux";
 // import * as homeActions from "../../store/home/actions";
@@ -10,9 +11,14 @@ export default function home(props) {
     //     this.state = {};
     // }
     return (
-      <div className="component-home">
-        Hello ! {props.pseudo}
-      </div>
+      <BrowserRouter>
+        <div className="component-home">
+          <Nav/>
+        </div>
+        <div className="main-route-place">
+            {/* <Route exact path="/home" component={Home} /> */}
+        </div>
+      </BrowserRouter>
     )
     
   }

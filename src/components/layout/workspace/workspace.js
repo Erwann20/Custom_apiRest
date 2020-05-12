@@ -64,7 +64,6 @@ export default function Workspace() {
             </div>
             <div className="main-route-place">
                 <Route exact path="/home" component={Home} />
-  
             </div>
           </BrowserRouter>
         )
