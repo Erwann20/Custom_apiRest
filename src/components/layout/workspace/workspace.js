@@ -1,32 +1,20 @@
-import React, {Component} from 'react';
+import React, {Component, useState} from 'react';
 import axios from 'axios'
 
 import FormTitle from '../../fundamentale/formTitle'
-import FormInput from '../../fundamentale/formInput'
 import FormButton from '../../fundamentale/formButton'
 
 
 import './workspace.sass'
+import { TextField } from '@material-ui/core';
+import { Router, BrowserRouter } from 'react-router-dom';
 
-export default class workspace extends Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-        pseudo: "",
-        present: false,
-      };
-    }
+export default function Workspace() {
+    const [pseudo, setPseudo] = useState()
+    const [present, setPresent] = useState(false)
 
-    setPseudo(event) {
-      this.setState({
-        pseudo: event.target.value
-      })
-    }
-
-    submit() {
-      this.setState({
-        present: false
-      })
+    function submit() {
+      setPresent(false)
 
       axios.get(`http://localhost:8080/workspace/`)
         .then(res => {
@@ -35,36 +23,39 @@ export default class workspace extends Component {
           users.map( user => {
             console.log(user.name)
 
-            if (this.state.pseudo === user.name) {
-              this.setState({
-                present: true
-              })
+            if (pseudo === user.name) {
+              setPresent(true)
             }
           })
         }
       )
     }
 
-    render() {
       let text =""
 
-      if (this.state.present === false) {
+      if (present === false) {
         text = "Le pseudo n'est pas valide"
       } else {
         text ="Le pseudo est valide"
       }
 
       return (
-        <div className="component-workspace">
-            
-            <div><FormTitle/></div>
+        <BrowserRouter>
+          <div className="component-workspace">
               
-            <div><FormInput setPseudo={this.setPseudo.bind(this)}/></div><br></br>
-            <div><FormButton submit={this.submit.bind(this)}/></div>
-          
-          {text}
-        
-        </div>
+              <div class="workspace-title">
+                <FormTitle text="Saisir un pseudo"/>
+              </div>
+              <div class="workspace-form">
+                <TextField class="textField" id="standard-basic" onChange={e => setPseudo(e.target.value)}/>
+                <FormButton submit={() => submit()}/>
+              </div>
+            {text}
+          </div>
+          <div className="main-route-place">
+              {/* <Route exact path="/login" component={FormConnect} /> */}
+          </div>
+        </BrowserRouter>
       )
-    }
+    
   }
