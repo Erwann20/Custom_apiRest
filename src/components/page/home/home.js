@@ -11,14 +11,11 @@ export default function home(props) {
     //     this.state = {};
     // }
     return (
-      <BrowserRouter>
+      
         <div className="component-home">
           <Nav/>
         </div>
-        <div className="main-route-place">
-            {/* <Route exact path="/home" component={Home} /> */}
-        </div>
-      </BrowserRouter>
+       
     )
     
   }

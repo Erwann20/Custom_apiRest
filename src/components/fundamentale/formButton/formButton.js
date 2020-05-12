@@ -17,7 +17,7 @@ export default class formButton extends Component {
     render() {
       return (
       <div className="component-form-button">
-        <Button variant="contained" color="primary" onClick={this.submit.bind(this)}>Toto</Button>
+        <Button variant="contained" color="primary" onClick={this.submit.bind(this)}>Ok</Button>
       </div>
       
       )

@@ -13,6 +13,7 @@ const path = require('path');
  const mockFolder = './json'; //mock json path folder
  const filePath = path.resolve(mockFolder);
  
+ 
  fileDisplay(filePath);
  
 
@@ -28,20 +29,30 @@ const path = require('path');
      })
  }
 
-
-
-function getjsonContent(path) {
-    let newpath = `./json/${path}.json`;
-    let result = JSON.parse(fs.readFileSync(newpath));
-    return result;
-}
-
-
 server.use(middlewares)
+
 
 const router = jsonServer.router(obj)
 
+// router.render = (req, res) => {
+//     res.status(500).jsonp({
+//       error: "error message here"
+//     })
+// }
+
 console.log(obj)
+
+// To handle POST, PUT and PATCH you need to use a body-parser
+// You can use the one used by JSON Server
+server.use(jsonServer.bodyParser)
+server.use((req, res, next) => {
+    console.log(req.body)
+    if (req.method === 'POST') {
+        req.body.createdAt = Date.now()
+    }
+    // Continue to JSON Server router
+    next()
+})
 
 server.use(router)
 server.listen(8080, () => {
