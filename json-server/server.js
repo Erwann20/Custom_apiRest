@@ -78,7 +78,6 @@ server.use((req, res, next) => {
             }
         })
     }
-    // Continue to JSON Server router
     next()
 })
 
