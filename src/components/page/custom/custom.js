@@ -36,8 +36,12 @@ export default function Custom(props) {
       let schemaParse = JSON.parse(schema)
       console.log(schemaParse)
       const customSchema = {
-        schema: JSON.parse(schema),
-        pseudo: "toto"
+        type: nameSchema,
+        pseudo: "toto",
+        schemaJson : {
+          schema: JSON.parse(schema),
+        }
+
       }
       Axios.post('http://localhost:8080/'+nameSchema, {customSchema}).then(res => {
       })

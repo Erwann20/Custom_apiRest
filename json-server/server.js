@@ -46,7 +46,27 @@ console.log(obj)
 // You can use the one used by JSON Server
 server.use(jsonServer.bodyParser)
 server.use((req, res, next) => {
-    console.log(req.body)
+    const files = fs.readdirSync(filePath);
+     files.forEach((filename) => {
+
+        if(path.basename(filePath) === 'json') {
+            try {
+                if ( req.body.customSchema.type === path.basename(filename,'.json') ) {
+                    console.log(filePath+'\\'+ path.basename(filename,''))
+                    fs.writeFile(filePath+'\\'+ path.basename(filename,''), JSON.stringify(req.body), err => {
+                        if (err ) {
+                            console.log("error writing file" + err)
+                        } else {
+                            console.log("Successfully wrote in file")
+                        }
+                    })
+                 }
+            } catch(e) {
+                // console.log(e)
+            } 
+        }
+     })
+
     if (req.method === 'POST') {
         req.body.createdAt = Date.now()
     }

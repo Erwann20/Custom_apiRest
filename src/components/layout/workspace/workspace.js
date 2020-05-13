@@ -23,7 +23,6 @@ export default function Workspace() {
           const users = res.data;
           // eslint-disable-next-line
           users.map( user => {
-            console.log(user.name)
 
             if (pseudo === user.name) {
               setPresent(true)

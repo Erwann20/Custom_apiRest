@@ -1,7 +1,1 @@
-[
-  {
-      "name": "toto",
-      "id": "ah"
-  }
-
-]
+{"customSchema":{"type":"template","pseudo":"toto","schemaJson":{"schema":[{"template":[{"name":"titi"}],"id":1}]}}}
