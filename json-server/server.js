@@ -51,13 +51,16 @@ server.use((req, res, next) => {
             try {
                 if ( req.body.customSchema.type === path.basename(filename,'.json') ) {
                     console.log(filePath+'\\'+ path.basename(filename,''))
-                    fs.writeFile(filePath+'\\'+ path.basename(filename,''), JSON.stringify(req.body), err => {
-                        if (err ) {
-                            console.log("error writing file" + err)
-                        } else {
-                            console.log("Successfully wrote in file")
-                        }
-                    })
+                    
+                    let jsonContent = req.body.customSchema.schemaJson.schema
+
+                    fs.writeFile(filePath+'\\'+ path.basename(filename,''), JSON.stringify(jsonContent), err => {
+                         if (err ) {
+                             console.log("error writing file" + err)
+                         } else {
+                             console.log("Successfully wrote in file")
+                         }
+                     })
                  } 
             } catch(e) {
                 // console.log(e)
