@@ -24,7 +24,7 @@ const path = require('path');
 
         if(path.basename(filePath) === 'json') {
             obj[path.basename(filename,'.json')] = require(path.join(filePath,filename))
-             console.log(filename)
+          
         }
      })
  }
@@ -40,15 +40,13 @@ const router = jsonServer.router(obj)
 //     })
 // }
 
-console.log(obj)
 
 // To handle POST, PUT and PATCH you need to use a body-parser
 // You can use the one used by JSON Server
 server.use(jsonServer.bodyParser)
 server.use((req, res, next) => {
     const files = fs.readdirSync(filePath);
-     files.forEach((filename) => {
-
+    files.forEach((filename) => {
         if(path.basename(filePath) === 'json') {
             try {
                 if ( req.body.customSchema.type === path.basename(filename,'.json') ) {
@@ -60,15 +58,22 @@ server.use((req, res, next) => {
                             console.log("Successfully wrote in file")
                         }
                     })
-                 }
+                 } 
             } catch(e) {
                 // console.log(e)
             } 
         }
      })
 
-    if (req.method === 'POST') {
-        req.body.createdAt = Date.now()
+    if (req.method === 'PUT') {
+        console.log(req.body.jsonUpload.name)
+        fs.writeFile(filePath+'\\'+ req.body.jsonUpload.name, JSON.stringify(req.body.jsonUpload.json), err => {
+            if (err ) {
+                console.log("error writing file" + err)
+            } else {
+                console.log("Successfully wrote in file")
+            }
+        })
     }
     // Continue to JSON Server router
     next()

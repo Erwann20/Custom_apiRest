@@ -3,6 +3,8 @@ import './nav.sass'
 import { Button } from '@material-ui/core';
 import { Route, BrowserRouter } from 'react-router-dom';
 import Custom from '../../page/custom/custom'
+import Upload from '../../page/update/update'
+
 // import { connect } from "react-redux";
 // import { bindActionCreators } from "redux";
 // import * as navActions from "../../store/nav/actions";
@@ -24,7 +26,7 @@ export default function nav() {
                   </Button></a>
               </div>
               <div class="nav-item">
-                  <a href="#"><Button variant="contained" color="primary">
+                  <a href="/upload"><Button variant="contained" color="primary">
                     Upload
                   </Button></a>
               </div>
@@ -33,6 +35,7 @@ export default function nav() {
           </div>
           <div className="main-route-place">
             <Route exact path="/custom" component={Custom} />
+            <Route exact path="/upload" component={Upload} />
           </div>
         </BrowserRouter>
       )
