@@ -34,13 +34,6 @@ server.use(middlewares)
 
 const router = jsonServer.router(obj)
 
-// router.render = (req, res) => {
-//     res.status(500).jsonp({
-//       error: "error message here"
-//     })
-// }
-
-
 // To handle POST, PUT and PATCH you need to use a body-parser
 // You can use the one used by JSON Server
 server.use(jsonServer.bodyParser)

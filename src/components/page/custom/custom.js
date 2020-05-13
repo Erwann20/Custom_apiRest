@@ -7,11 +7,23 @@ import Axios from 'axios';
 // import { connect } from "react-redux";
 // import { bindActionCreators } from "redux";
 // import * as customActions from "../../store/custom/actions";
+
+function isJson(str) {
+  try {
+      JSON.parse(str);
+  } catch (e) {
+      return false;
+  }
+  return true;
+}
+
+
 export default function Custom(props) {
     const [nameSchema, setNameSchema] = useState()
     const [schemaStatus, setSchemaStatus] = useState(500)
     const [schema, setSchema] = useState()
     const [msgError, setMsgError] = useState()
+    const [alertUpload, setAlertUpload] = useState()
 
     function search() {
 
@@ -33,24 +45,38 @@ export default function Custom(props) {
 
     function modifySchema() {
 
-      let schemaParse = JSON.parse(schema)
-      console.log(schemaParse)
-      const customSchema = {
-        type: nameSchema,
-        pseudo: "toto",
-        schemaJson : {
-          schema: JSON.parse(schema),
+        if(isJson(schema)) {
+            console.log(true)
+            const customSchema = {
+              type: nameSchema,
+              pseudo: "toto",
+              schemaJson : {
+                schema: JSON.parse(schema),
+              }
+            }
+            let link = "http://localhost:8080/"+ nameSchema
+            let textAlertSuccess = (
+              <div class="alert">
+                  <p>Vous pouvez accéder à votre api: <a target="_blank" href={link} >{link}</a></p>
+              </div>
+            )
+
+            Axios.post('http://localhost:8080/'+nameSchema, {customSchema}).then(res => {
+              setAlertUpload(textAlertSuccess)
+            })
+        } else {
+            console.log(false)
+            setAlertUpload(<p>Le schema JSON est invalide</p>)
         }
 
-      }
-      Axios.post('http://localhost:8080/'+nameSchema, {customSchema}).then(res => {
-      })
+      
     }
 
     if (schemaStatus === 200) {
       return (
       <div className="component-custom">
         <textarea onChange={e => setSchema(e.target.value)} value={schema}></textarea>
+        { alertUpload }
         <FormButton submit={ () => modifySchema() } />
       </div>)
     } else {
@@ -61,6 +87,7 @@ export default function Custom(props) {
           </div>
           <div class="custom-form">
             <TextField class="textField"  onChange={ e => setNameSchema(e.target.value) } />
+          
             <FormButton submit={ () => search() } />
           </div>
           { msgError }

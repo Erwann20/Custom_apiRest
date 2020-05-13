@@ -8,8 +8,10 @@ import FormTitle from '../../fundamentale/formTitle';
 // import * as updateActions from "../../store/update/actions";
 export default function Update() {
     let fileReader
+    const path = require('path');
     const [ file, setFile ] = useState()
     const [ fileName, setFileName ]= useState()
+    const [alertUpload, setAlertUpload] = useState()
     // constructor(props) {
     //     super(props);
     //     this.state = {};
@@ -25,7 +27,14 @@ export default function Update() {
         //   console.log(res)
         // })
         Axios.put('http://localhost:8080/create', { jsonUpload } ).then(resp => {
+          let link = "http://localhost:8080/"+ path.basename(fileName,'.json')
 
+          let textAlertSuccess = (
+            <div class="alert">
+                <p>Vous pouvez accéder à votre api: <a target="_blank" href={link} >{link}</a></p>
+            </div>
+          )
+          setAlertUpload(textAlertSuccess)
             console.log(resp.data);
         }).catch(error => {
 
@@ -53,6 +62,7 @@ export default function Update() {
           <FormTitle text="Select a file to upload :"/><br></br><br></br>
           <input type="file" onChange={ e => handleFileChoose(e.target.files[0]) } name="fileupload"  id="fileupload"></input><br></br><br></br>
           <Button variant="contained" color="primary"  onClick={() => upload() }>Upload</Button>
+          {alertUpload}
         </div>
       )
   }
