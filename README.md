@@ -21,7 +21,7 @@ you can go to : IP:3500 or localhost:3500
 
 ## For docker (SERVER BACK)
 
-You must go in json-server folder: cd json-server <br>
+You must go in json-server folder: `cd json-server` <br>
 
 build the docker with a docker file : `docker build -t json-server` . <br>
 <br>
