@@ -12,7 +12,6 @@ you can start front server with the command: <br>
 ## For docker (SERVER FRONT)
 
 build the docker with a docker file : `docker build -t custom_apirest` . <br>
-<br>
 
 run the docker image with the name : custom_apirest<br><br>
 
