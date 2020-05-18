@@ -3,7 +3,7 @@
 
 you can start the backend server with the command: <br>
 `cd json-server` <br>
-nodemon server.js<br>
+`nodemon server.js`<br>
 
 you can start frontend server with the command: <br>
 `npm start`
@@ -11,7 +11,7 @@ you can start frontend server with the command: <br>
 # WITH DOCKER
 ## For docker (FRONTEND SERVER)
 
-build the docker with a docker file : `docker build -t custom_apirest` . <br>
+build the docker with a docker file : `docker build -t custom_apirest .` <br>
 
 run the docker image with the name : custom_apirest<br><br>
 
@@ -23,7 +23,7 @@ you can go to : IP:3500 or localhost:3500
 
 You must go in json-server folder: `cd json-server` <br>
 
-build the docker with a docker file : `docker build -t json-server` . <br>
+build the docker with a docker file : `docker build -t json-server .` <br>
 <br>
 
 run the docker image with the name : json-server<br><br>
