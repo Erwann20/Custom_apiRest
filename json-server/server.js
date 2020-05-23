@@ -27,7 +27,40 @@ const path = require('path');
           
         }
      })
+    
  }
+
+ function allNameJson(filePath) {
+    const files = fs.readdirSync(filePath);
+    let listFileName = [
+      
+    ]
+
+    files.forEach((filename) => {
+
+       if(path.basename(filePath) === 'json' && filename != "workspace.json") {
+           listFileName.push({
+               name: path.basename(filename, '.json')
+           })
+       }
+    })
+
+    const jsonTest = {
+        schemajson: listFileName
+    }
+
+    console.log(jsonTest)
+
+    fs.writeFile(filePath+'\\getNameSchema.json', JSON.stringify(jsonTest), err => {
+        if (err ) {
+            console.log("error writing file" + err)
+        } else {
+            console.log("Successfully wrote in file")
+        }
+    })
+ }
+
+
 
 server.use(middlewares)
 
@@ -52,11 +85,12 @@ server.use((req, res, next) => {
                              console.log("error writing file" + err)
                          } else {
                              console.log("Successfully wrote in file")
+                             allNameJson(filePath)
                          }
                      })
                  } 
             } catch(e) {
-                // console.log(e)
+        
             } 
         }
      })
@@ -68,6 +102,7 @@ server.use((req, res, next) => {
                 console.log("error writing file" + err)
             } else {
                 console.log("Successfully wrote in file")
+                allNameJson(filePath)
             }
         })
     }
@@ -76,5 +111,5 @@ server.use((req, res, next) => {
 
 server.use(router)
 server.listen(8080, () => {
-  console.log('JSON Server is running')
+console.log('JSON Server is running')
 })
