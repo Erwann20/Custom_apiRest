@@ -1,6 +1,5 @@
 // server.js
 const jsonServer = require('json-server')
-const express = require('express');
 const server = jsonServer.create()
 
 const middlewares = jsonServer.defaults()
@@ -30,6 +29,18 @@ const path = require('path');
     
  }
 
+ listeSchemaProtected = ["workspace.json", "getNameSchema.json"]
+ function schemaProtected(nameTest) {
+    let isProtected = false
+    listeSchemaProtected.forEach( name => {
+        if(nameTest === name) {
+            isProtected =  true
+        }
+    })
+
+    return isProtected
+ }
+
  function allNameJson(filePath) {
     const files = fs.readdirSync(filePath);
     let listFileName = [
@@ -37,8 +48,9 @@ const path = require('path');
     ]
 
     files.forEach((filename) => {
+        schemaProtected(filename)
 
-       if(path.basename(filePath) === 'json' && filename != "workspace.json") {
+       if(path.basename(filePath) === 'json' && schemaProtected(filename)!=true) {
            listFileName.push({
                name: path.basename(filename, '.json')
            })
