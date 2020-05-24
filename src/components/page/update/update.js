@@ -1,4 +1,4 @@
-import React, {Component, useState} from 'react';
+import React, {useState} from 'react';
 import './update.sass'
 import Axios from 'axios';
 import { Button } from '@material-ui/core';
@@ -31,7 +31,7 @@ export default function Update() {
 
           let textAlertSuccess = (
             <div class="alert">
-                <p>Vous pouvez accéder à votre api: <a target="_blank" href={link} >{link}</a></p>
+                <p>Vous pouvez accéder à votre api: <a target="_blank" rel="noopener noreferrer" href={link} >{link}</a></p>
             </div>
           )
           setAlertUpload(textAlertSuccess)

@@ -1,4 +1,4 @@
-import React, {Component, useState} from 'react';
+import React, { useState } from 'react';
 import './custom.sass'
 import { TextField } from '@material-ui/core';
 import FormTitle from '../../fundamentale/formTitle';
@@ -57,7 +57,7 @@ export default function Custom(props) {
             let link = "http://localhost:8080/"+ nameSchema
             let textAlertSuccess = (
               <div class="alert">
-                  <p>Vous pouvez accéder à votre api: <a target="_blank" href={link} >{link}</a></p>
+                  <p>Vous pouvez accéder à votre api: <a target="_blank" rel="noopener noreferrer" href={link} >{link}</a></p>
               </div>
             )
 

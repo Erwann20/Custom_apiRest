@@ -1,4 +1,4 @@
-import React, {Component, useState} from 'react';
+import React, { useState} from 'react';
 import './nav.sass'
 import { Button } from '@material-ui/core';
 import { Route, BrowserRouter } from 'react-router-dom';
@@ -33,7 +33,7 @@ export default function Nav() {
                 listeSchema.map((fileName) => 
                 htmlList.push(
                     <div>
-                      <a target="_blank" href={"http://localhost:8080/"+fileName}>{fileName}</a><br></br>
+                      <a target="_blank" rel="noopener noreferrer" href={"http://localhost:8080/"+fileName}>{fileName}</a><br></br>
                     </div>
                     )
                 )
